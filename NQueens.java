@@ -9,7 +9,7 @@ public class NQueens {
 	static boolean place(int k, int i){
 
 		for(int j=1;j<=k-1;j++){ // check for all the queens placed from 1 to k-1 and check if queen at ith column and kth row clashes with them
-			if(x[j]==i || Math.abs(x[j]-i)==Math.abs(k-j)) // checks for same column or diagonal queens
+			if(x[j]==i || Math.abs(x[j]-i)==Math.abs(k-j)) // checks for same column or diagonal queens i.e. difference in rows equals difference in columns
 				return false;
 		}
 		return true;
