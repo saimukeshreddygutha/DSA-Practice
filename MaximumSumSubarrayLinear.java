@@ -50,13 +50,14 @@ public class MaximumSumSubarrayLinear {
 
 		int[] array = new int[n];
 
-		boolean allNegative = true;
+		boolean allNegative = true;//to find if all the elements in the array are negative
 
 		for(int i=0;i<n;i++){
 			array[i]=scan.nextInt();
 			if(array[i]>0)
 				allNegative=false;
 		}
+		//if all elements are negative find the max value else find the max sum subarray using kadanes algorithm
 
 		int ans;
 		if(allNegative){
