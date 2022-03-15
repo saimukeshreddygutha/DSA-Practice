@@ -1,6 +1,9 @@
 class Solution {
 public:
+    /*
+    https://leetcode.com/problems/min-cost-climbing-stairs/
     
+    */
     int minCostClimbingStairs(vector<int>& cost) {
         
         for(int i=2;i<cost.size();i++){
