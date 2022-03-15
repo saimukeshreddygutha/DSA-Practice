@@ -1,4 +1,8 @@
 class Solution {
+    
+    /*
+    https://leetcode.com/problems/n-th-tribonacci-number/
+    */
 public:
     int tribonacci(int n) {
         int ans[38];
