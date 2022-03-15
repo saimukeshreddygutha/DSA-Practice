@@ -1,6 +1,7 @@
 class Solution {
 public:
     /*
+    https://leetcode.com/problems/counting-bits/
     approach is that an even number e will have same number of set bits as e/2
     an odd number o will have one less set bit than o/2
     ex 11 -> 3
