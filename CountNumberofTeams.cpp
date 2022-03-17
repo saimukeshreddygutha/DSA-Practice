@@ -1,5 +1,8 @@
 class Solution {
 public:
+    /*
+    TLE O(n^3) BruteForce Approach
+    */
     int numTeams(vector<int>& rating) {
         
         int n = rating.size();
