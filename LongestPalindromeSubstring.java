@@ -45,7 +45,7 @@ public class LongestPalindromeSubstring {
 			for(int i =0;i<slen-k;i++){
 				if((s.charAt(i)==s.charAt(i+k)) && (a[i+1][i+k-1]==1)){
 					a[i][i+k]=1;
-					if(ansLen < i+k-1){
+					if(ansLen < k + 1){
 						ansLen = k+1;
 						ansString = s.substring(i,i+k+1);
 					}
