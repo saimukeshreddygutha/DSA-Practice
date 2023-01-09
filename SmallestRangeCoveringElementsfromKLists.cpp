@@ -1,34 +1,56 @@
+class Node{
+public:
+    int val;
+    int i;
+    int j;
+
+    Node(int val, int i, int j){
+        this->val = val;
+        this->i = i;
+        this->j = j;
+    }
+};
+
+class Compare{
+    public:
+     bool operator()(Node* a, Node* b){
+        return a->val > b->val;
+     }
+};
+
 class Solution {
 public:
-    struct numcompare {
-        bool operator() (const pair<int, pair<int, int>> &x, const pair<int, pair<int, int>> &y){
-            return x.first > y.first;
-        }
-    };
-    
     vector<int> smallestRange(vector<vector<int>>& nums) {
-        priority_queue< pair<int, pair<int, int>>, vector< pair<int, pair<int, int>>>, numcompare> minheap;
-        int start = 0, end = INT_MAX, curr_max = INT_MIN;
-        for(int i = 0; i < nums.size(); i++){
-            if(!nums[i].empty()){
-                minheap.push({nums[i][0], {i, 0}});
-                curr_max = max(curr_max, nums[i][0]);
-            }
+        
+        priority_queue<Node*, vector<Node*>, Compare> pq;
+        int n = nums.size();
+        int mn = INT_MAX, mx = INT_MIN;
+        for(int i = 0;i < n;i++){
+            Node* n = new Node(nums[i][0], i, 0);
+            pq.push(n);
+            mn = min(mn, nums[i][0]);
+            mx = max(mx, nums[i][0]);
         }
-        while(minheap.size() == nums.size()){
-            auto tops = minheap.top();
-            minheap.pop();
-            if(end - start > curr_max - tops.first){
-                start = tops.first;
-                end = curr_max;
-            }
-            tops.second.second++;
-            if(nums[tops.second.first].size() > tops.second.second){
-                tops.first = nums[tops.second.first][tops.second.second];
-                minheap.push(tops);
-                curr_max = max(curr_max, tops.first);
-            }
+        int diff = mx - mn;
+        vector<int> ans {mn, mx};
+
+        while(pq.size() == n){
+            Node* tn = pq.top();pq.pop();
+            int i = tn->i, j = tn->j;
+            if((int)nums[i].size() - 1 > j){
+                Node* n = new Node(nums[i][j+1], i, j + 1);
+                pq.push(n);
+                Node* t = pq.top();
+                mn = t->val;
+                mx = max(mx, n->val);
+
+                if(diff > mx - mn){
+                    ans[0] = mn;
+                    ans[1] = mx;
+                    diff = mx - mn;
+                }
+            }else break;
         }
-        return {start, end};
+        return ans;
     }
 };
