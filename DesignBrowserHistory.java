@@ -15,31 +15,17 @@ class Node{
 class BrowserHistory {
     Node root;
     Node lastVisited;
-    HashMap<String, Node> map = new HashMap<>();
     public BrowserHistory(String homepage) {
         this.root = new Node(homepage);
-        map.put(homepage, this.root);
         lastVisited = root;
     }
     
     public void visit(String url) {
-        Node r = root;
-        Node t = map.getOrDefault(url, null);
-        if(t == null){
-            Node nn = new Node(url);
-            lastVisited.next = nn;
-            nn.prev = lastVisited;
-            map.put(url, nn);
-            lastVisited = nn;            
-        }else{
-            Node p = t.prev;
-            if(p != null){
-                p.next = t.next;
-                t.next.prev = p;
-                lastVisited.next = t;
-                lastVisited = t;
-            }
-        }
+        Node nn = new Node(url);
+        lastVisited.next = nn;
+        nn.prev = lastVisited;
+        lastVisited = nn;
+        
     }
     
     public String back(int steps) {
